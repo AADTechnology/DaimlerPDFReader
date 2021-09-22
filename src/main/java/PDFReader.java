@@ -35,6 +35,7 @@ PdfDocument pdfDoc=new PdfDocument();
 //        File file= new File("E:/AAD/Dailmler/pdf/mate.pdf");
         File file= new File("E:/AAD/Documents/Daimler/invoicePdf/NIPPON_AUDIOTRONIX.pdf");
         PDDocument doc=PDDocument.load(file);
+        System.out.println("Test git");
         PDFTextStripper pdfTextStripper=new PDFTextStripper();
         String text= pdfTextStripper.getText(doc);
             System.out.println(text);
