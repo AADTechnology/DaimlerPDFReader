@@ -5,6 +5,8 @@ import com.itextpdf.text.pdf.*;
 import org.apache.log4j.Logger;
 import pdfWriter.DTO.InvoiceDTO;
 import pdfWriter.DTO.InvoiceDtlDTO;
+
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -346,7 +348,7 @@ public class PdfWriterAsn {
 
             document.add(table);
             document.close();
-        } catch (DocumentException e) {
+        } catch (DocumentException | FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("Inside Catch Block");
 
