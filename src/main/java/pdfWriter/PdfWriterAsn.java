@@ -125,7 +125,7 @@ public class PdfWriterAsn {
             table.addCell(cell);
 
             /*Invoice Qty*/
-            cell = insertCell(table, invoiceDtlDTO.getQty(), Element.ALIGN_CENTER, Element.ALIGN_TOP, 2, 1, fontBig, null);
+    /*hardcoded*/        cell = insertCell(table, "invoiceDtlDTO.getQty()", Element.ALIGN_CENTER, Element.ALIGN_TOP, 2, 1, fontBig, null);
             cell.setBorder(Rectangle.LEFT | Rectangle.RIGHT);
             table.addCell(cell);
 
