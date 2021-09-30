@@ -19,7 +19,7 @@ public class PdfWriterGatePass {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         System.out.println(date);
-        createGatePass();
+      //  createGatePass();
         System.out.println("Created PDF " + date.toString().substring(10, 19));
     }
 
@@ -48,8 +48,6 @@ public class PdfWriterGatePass {
             Font fontNormal = new Font(Font.FontFamily.TIMES_ROMAN, 10f, Font.NORMAL, BaseColor.BLACK);
             Font fontBold = new Font(Font.FontFamily.TIMES_ROMAN, 11f, Font.BOLD, BaseColor.BLACK);
             Font fontHeader = new Font(Font.FontFamily.TIMES_ROMAN, 14f, Font.BOLD, BaseColor.BLACK);
-
-
             /*13*/
             float[] columnWidths = {11f, 7f, 10f, 11f, 3f, 6f, 6f, 3f, 7f, 8f, 8f, 7f, 13};
             PdfPTable table = new PdfPTable(columnWidths);
@@ -118,7 +116,6 @@ public class PdfWriterGatePass {
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT);
             table.addCell(cell);
 
-
             cell = insertCell(table, "Item", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT);
             table.addCell(cell);
@@ -142,7 +139,6 @@ public class PdfWriterGatePass {
             cell = insertCell(table, "Unit", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT);
             table.addCell(cell);
-
 
             cell = insertCell(table, "RTP Code / Pack Quantity", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 2, 1, fontBold, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT);
@@ -253,7 +249,6 @@ public class PdfWriterGatePass {
             cell = insertCell(table, " ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 12, 3, fontBold, null);
             cell.setBorder(Rectangle.NO_BORDER);
             table.addCell(cell);
-
             document.add(table);
             document.close();
         } catch (DocumentException | FileNotFoundException e) {
