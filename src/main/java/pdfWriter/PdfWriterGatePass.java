@@ -19,13 +19,13 @@ public class PdfWriterGatePass {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         System.out.println(date);
-      //  createGatePass();
+        createGatePass();
         System.out.println("Created PDF " + date.toString().substring(10, 19));
     }
 
     public static PdfPCell insertCell(PdfPTable table, String text, int horAlign, int verAligh, int colSpan, int rowSpan, Font font, BaseColor backgroundColor) {
         PdfPCell cell = new PdfPCell(new Phrase(text.trim(), font));
-        cell.setPaddingTop(0);
+        cell.setPaddingTop(2f);
         cell.setHorizontalAlignment(horAlign);
         if (verAligh > 0) {
             cell.setVerticalAlignment(verAligh);
@@ -40,14 +40,15 @@ public class PdfWriterGatePass {
         return cell;
     }
 
-    public static void createGatePass(InvoiceDTO invoiceDTO,InvoiceDtlDTO invoiceDtlDTO) {
+    public static void createGatePass() {
+   // public static void createGatePass(InvoiceDTO invoiceDTO,InvoiceDtlDTO invoiceDtlDTO) {
         try {
             Document document = new Document(PageSize.A4.rotate(), 5f, 5f, 5f, 5f);
             PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream("E:/AAD/Documents/Daimler/CreatePdf/GatePass.pdf"));
             document.open();
-            Font fontNormal = new Font(Font.FontFamily.TIMES_ROMAN, 10f, Font.NORMAL, BaseColor.BLACK);
-            Font fontBold = new Font(Font.FontFamily.TIMES_ROMAN, 11f, Font.BOLD, BaseColor.BLACK);
-            Font fontHeader = new Font(Font.FontFamily.TIMES_ROMAN, 14f, Font.BOLD, BaseColor.BLACK);
+            Font fontNormal = new Font(Font.FontFamily.HELVETICA, 10f, Font.NORMAL, BaseColor.BLACK);
+            Font fontBold = new Font(Font.FontFamily.HELVETICA, 10f, Font.BOLD, BaseColor.BLACK);
+            Font fontHeader = new Font(Font.FontFamily.HELVETICA, 14f, Font.BOLD, BaseColor.BLACK);
             /*13*/
             float[] columnWidths = {11f, 7f, 10f, 11f, 3f, 6f, 6f, 3f, 7f, 8f, 8f, 7f, 13};
             PdfPTable table = new PdfPTable(columnWidths);
@@ -156,70 +157,73 @@ public class PdfWriterGatePass {
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT);
             table.addCell(cell);
 
-            cell = insertCell(table, "Barcode", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
+            cell = insertCell(table, "Barcode", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontNormal, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT | Rectangle.RIGHT);
             table.addCell(cell);
 
             /*Dock No*/
-            cell = insertCell(table, "182735113", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
+            cell = insertCell(table, "182735113", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontNormal, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT | Rectangle.BOTTOM);
             table.addCell(cell);
 
             /*Item*/
-            cell = insertCell(table, "000010", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
+            cell = insertCell(table, "000010", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontNormal, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT | Rectangle.BOTTOM);
             table.addCell(cell);
 
             /*Invoice Number*/
-            cell = insertCell(table,invoiceDTO.getInvoiceNo() , Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
+            cell = insertCell(table,"1821507573" , Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontNormal, null);
+//            cell = insertCell(table,invoiceDTO.getInvoiceNo() , Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT | Rectangle.BOTTOM);
             table.addCell(cell);
 
             /*Material No*/
-            cell = insertCell(table, "A.400.462.02.23", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
+            cell = insertCell(table, "A.400.462.02.23", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontNormal, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT | Rectangle.BOTTOM);
             table.addCell(cell);
 
             /*QC*/
-            cell = insertCell(table, " ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
+            cell = insertCell(table, " ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontNormal, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT | Rectangle.BOTTOM);
             table.addCell(cell);
 
             /*Quantity*/
-            cell = insertCell(table, invoiceDtlDTO.getQty(), Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
+//            cell = insertCell(table, invoiceDtlDTO.getQty(), Element.ALIGN_LEFT, Element.ALIGN_RIGHT, 1, 1, fontBold, null);
+            cell = insertCell(table, "6", Element.ALIGN_RIGHT, Element.ALIGN_LEFT, 1, 1, fontNormal, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT | Rectangle.BOTTOM);
             table.addCell(cell);
 
             /*Unit*/
-            cell = insertCell(table, invoiceDtlDTO.getUom(), Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
+            cell = insertCell(table, "PC", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontNormal, null);
+//            cell = insertCell(table, invoiceDtlDTO.getUom(), Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT | Rectangle.BOTTOM);
             table.addCell(cell);
 
             /*RTP Code*/
-            cell = insertCell(table, "/ 6 ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 2, 1, fontBold, null);
+            cell = insertCell(table, "/ 6 ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 2, 1, fontNormal, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT | Rectangle.BOTTOM);
             table.addCell(cell);
 
             /*Actual Qty*/
-            cell = insertCell(table, " ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
+            cell = insertCell(table, " ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontNormal, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT | Rectangle.BOTTOM);
             table.addCell(cell);
 
             /*No of Boxes*/
-            cell = insertCell(table, " ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
+            cell = insertCell(table, " ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontNormal, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT | Rectangle.BOTTOM);
             table.addCell(cell);
 
             /*Qty/Box*/
-            cell = insertCell(table, " ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontBold, null);
+            cell = insertCell(table, " ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 1, fontNormal, null);
             cell.setBorder(Rectangle.TOP | Rectangle.LEFT | Rectangle.BOTTOM);
             table.addCell(cell);
 
             /*Invoice Barcode*/
             barcodeEAN = new Barcode128();
             barcodeEAN.setCodeType(Barcode.CODE128);
-            barcodeEAN.setCode(invoiceDTO.getInvoiceNo());
-          //  barcodeEAN.setCode("1821507553");
+//            barcodeEAN.setCode(invoiceDTO.getInvoiceNo());
+           barcodeEAN.setCode("1821507553");
             barcodeEAN.setFont(null);
             barcodeEAN.setBarHeight(18f);
             barcodeEAN.setX(1f);
@@ -239,14 +243,14 @@ public class PdfWriterGatePass {
                 logger.error(e);
             }
 
-            cell = insertCell(table, "Remarks ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 3, fontBold, null);
+            cell = insertCell(table, "Remarks ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 1, 3, fontNormal, null);
             cell.setBorder(Rectangle.NO_BORDER);
             cell.setPaddingTop(10f);
             cell.setPaddingBottom(10f);
             table.addCell(cell);
 
             /*Remarks*/
-            cell = insertCell(table, " ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 12, 3, fontBold, null);
+            cell = insertCell(table, " ", Element.ALIGN_LEFT, Element.ALIGN_LEFT, 12, 3, fontNormal, null);
             cell.setBorder(Rectangle.NO_BORDER);
             table.addCell(cell);
             document.add(table);
